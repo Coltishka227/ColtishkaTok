@@ -3,263 +3,101 @@
 <head>
   <meta charset="UTF-8">
   <title>ColtishkaTok</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+<style>
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #000000, #8700ff);
+    background-size: 400% 400%;
+    animation: gradient 12s ease infinite;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+  }
+  @keyframes gradient {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+  }
+  .video-card {
+    background: rgba(0,0,0,0.6);
+    border-radius: 16px;
+    margin-bottom: 20px;
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(255,255,255,0.2);
+    width: 320px;
+    max-width: 90%;
+  }
+  video {
+    width: 100%;
+    border-radius: 12px;
+  }
 
-    body {
-      background: linear-gradient(135deg, #ff0050, #1a1a1a, #8700ff);
-      background-size: 300% 300%;
-      animation: gradientShift 8s ease infinite;
-      color: white;
-      font-family: 'Segoe UI', sans-serif;
-      scroll-behavior: smooth;
-    }
-
-    @keyframes gradientShift {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    .auth-screen {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.9);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      z-index: 999;
-      animation: fadeIn 0.5s ease;
-    }
-
-    @keyframes fadeIn {
-      from {opacity: 0;}
-      to {opacity: 1;}
-    }
-
-    .auth-screen input {
-      margin: 10px;
-      padding: 10px;
-      font-size: 16px;
-      width: 250px;
-      border: none;
-      border-radius: 8px;
-      outline: none;
-    }
-
-    .auth-screen button {
-      padding: 10px 20px;
-      font-size: 16px;
-      margin-top: 15px;
-      background: #ff0050;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-
-    .auth-screen button:hover {
-      background: #ff3377;
-    }
-
-    header {
-      background: linear-gradient(90deg, #ff0050, #8700ff);
-      padding: 20px 0;
-      text-align: center;
-      font-size: 28px;
-      font-weight: bold;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-    }
-
-    .user-profile {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 20px;
-      background: #1a1a1a;
-      box-shadow: inset 0 -1px 0 #333;
-    }
-
-    .user-left {
-      display: flex;
-      align-items: center;
-    }
-
-    .user-left img {
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      margin-right: 12px;
-      border: 2px solid #ff0050;
-    }
-
-    .user-left span {
-      font-size: 18px;
-    }
-
-    .logout-btn {
-      background: none;
-      color: #888;
-      border: 1px solid #444;
-      padding: 6px 10px;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: color 0.3s, border 0.3s;
-    }
-
-    .logout-btn:hover {
-      color: #fff;
-      border-color: #ff0050;
-    }
-
-    .video-block {
-      position: relative;
-      max-width: 420px;
-      margin: 40px auto;
-      background: #222;
-      border-radius: 16px;
-      padding: 16px;
-      box-shadow: 0 0 20px rgba(255, 0, 80, 0.3);
-      transition: transform 0.3s ease;
-    }
-
-    .video-block:hover {
-      transform: scale(1.01);
-    }
-
-    video {
-      width: 100%;
-      border-radius: 12px;
-    }
-
-    .like-btn {
-      margin-top: 12px;
-      font-size: 24px;
-      text-align: center;
-      color: #ff0050;
-      cursor: pointer;
-      transition: transform 0.2s ease;
-    }
-
-    .like-btn:hover {
-      transform: scale(1.2);
-    }
-
-    .heart {
-      position: absolute;
-      font-size: 32px;
-      color: #ff0050;
-      pointer-events: none;
-      animation: floatUp 0.8s ease-out forwards;
-    }
-
-    @keyframes floatUp {
-      0% {
-        opacity: 1;
-        transform: translate(-50%, 0) scale(1);
-      }
-      100% {
-        opacity: 0;
-        transform: translate(-50%, -100px) scale(1.5);
-      }
-    }
-
-    footer {
-      text-align: center;
-      margin: 40px;
-      color: #ccc;
-    }
-  </style>
+  .auth-screen {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.95);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  .auth-screen input {
+    margin: 10px;
+    padding: 10px;
+    font-size: 16px;
+    width: 240px;
+    border-radius: 8px;
+    border: none;
+  }
+  .auth-screen button {
+    padding: 10px 20px;
+    background: #ff2d55;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 0 10px #ff2d55;
+  }
+</style>
 </head>
 <body>
+<div class="auth-screen" id="auth">
+  <h2>Добро пожаловать в ColtishkaTok</h2>
+  <input type="text" id="nickname" placeholder="Введите никнейм">
+  <button onclick="login()">Войти</button>
+</div>
+  <h1>ColtishkaTok 🎥</h1>
 
-  <div class="auth-screen" id="auth">
-    <h2>Добро пожаловать в ColtishkaTok!</h2>
-    <input type="text" id="nickname" placeholder="Введите никнейм">
-    <input type="text" id="avatar" placeholder="Ссылка на аватар (jpg/png)">
-    <button onclick="login()">Войти</button>
+  <div class="video-card">
+    <video src="video1.mp4" controls loop muted></video>
+  </div>
+  <div class="video-card">
+    <video src="video2.mp4" controls loop muted></video>
+  </div>
+  <div class="video-card">
+    <video src="video3.mp4" controls loop muted></video>
   </div>
 
-  <header>🔥 ColtishkaTok</header>
-  <div class="user-profile" id="profile" style="display: none;">
-    <div class="user-left">
-      <img id="profile-avatar" src="">
-      <span id="profile-name"></span>
-    </div>
-    <button class="logout-btn" onclick="logout()">Выйти</button>
-  </div>
+<script>
+  function login() {
+    const nick = document.getElementById("nickname").value.trim();
+    if (!nick) return alert("Введите ник");
+    localStorage.setItem("nickname", nick);
+    document.getElementById("auth").style.display = "none";
+  }
 
-  <div class="video-block">
-    <video src="video1.mp4" autoplay loop muted controls></video>
-    <div class="like-btn" onclick="spawnHeart(this)">❤️ Лайк</div>
-  </div>
-
-  <div class="video-block">
-    <video src="video2.mp4" autoplay loop muted controls></video>
-    <div class="like-btn" onclick="spawnHeart(this)">❤️ Лайк</div>
-  </div>
-
-  <div class="video-block">
-    <video src="video3.mp4" autoplay loop muted controls></video>
-    <div class="like-btn" onclick="spawnHeart(this)">❤️ Лайк</div>
-  </div>
-
-  <footer>© ColtishkaTok 2025</footer>
-
-  <script>
-    function login() {
-      const nick = document.getElementById("nickname").value.trim();
-      const avatar = document.getElementById("avatar").value.trim();
-      if (!nick || !avatar) return alert("Заполни оба поля!");
-      localStorage.setItem("coltishka_nick", nick);
-      localStorage.setItem("coltishka_avatar", avatar);
+  window.onload = () => {
+    const nick = localStorage.getItem("nickname");
+    if (nick) {
       document.getElementById("auth").style.display = "none";
-      showProfile();
     }
-
-    function showProfile() {
-      const nick = localStorage.getItem("coltishka_nick");
-      const avatar = localStorage.getItem("coltishka_avatar");
-      if (nick && avatar) {
-        document.getElementById("profile-avatar").src = avatar;
-        document.getElementById("profile-name").textContent = `Привет, @${nick}`;
-        document.getElementById("profile").style.display = "flex";
-      }
-    }
-
-    function logout() {
-      localStorage.removeItem("coltishka_nick");
-      localStorage.removeItem("coltishka_avatar");
-      location.reload();
-    }
-
-    function spawnHeart(button) {
-      const heart = document.createElement("div");
-      heart.className = "heart";
-      heart.innerText = "❤️";
-      heart.style.left = "50%";
-      heart.style.top = "0";
-      button.parentElement.appendChild(heart);
-      setTimeout(() => heart.remove(), 1000);
-    }
-
-    window.onload = () => {
-      const nick = localStorage.getItem("coltishka_nick");
-      const avatar = localStorage.getItem("coltishka_avatar");
-      if (nick && avatar) {
-        document.getElementById("auth").style.display = "none";
-        showProfile();
-      }
-    };
-  </script>
+  };
+</script>
 
 </body>
 </html>
