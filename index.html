@@ -129,9 +129,110 @@ body.summer .video-card {
       background: rgba(0, 0, 50, 0.7);
       color: #fff;
     }
+
+#preloader {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: #000;
+  color: white;
+  font-size: 32px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  animation: fadeOut 2s ease 2s forwards;
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+.logout-wrapper {
+  margin-top: 10px;
+}
+
+#logoutBtn {
+  padding: 8px 18px;
+  background: #2c2c2c;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s;
+  box-shadow: 0 0 6px rgba(255,255,255,0.15);
+}
+#logoutBtn:hover {
+  background: #444;
+}
+
+.logout-wrapper {
+  margin-top: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.logout-inner {
+  text-align: center;
+}
+
+.confirm-logout {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.85);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 3000;
+}
+
+.confirm-box {
+  background: #1c1c1c;
+  padding: 20px 30px;
+  border-radius: 16px;
+  box-shadow: 0 0 10px #ff2d55;
+  text-align: center;
+  color: white;
+}
+
+.confirm-buttons button {
+  margin: 10px;
+  padding: 8px 16px;
+  font-size: 15px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.confirm-buttons button:first-child {
+  background: #ff2d55;
+  color: white;
+}
+
+.confirm-buttons button:last-child {
+  background: #444;
+  color: white;
+}
+
+.confirm-buttons button:hover {
+  opacity: 0.85;
+}
   </style>
 </head>
 <body>
+
+<div id="preloader">
+  <h1>ColtishkaTok 🎬</h1>
+</div>
+
 
 <div class="auth-screen" id="auth">
   <h2>Добро пожаловать в ColtishkaTok</h2>
@@ -151,6 +252,14 @@ body.summer .video-card {
       <option value="winter">❄ Зимняя</option>
     </select>
   </div>
+
+<div class="logout-wrapper">
+  <div class="logout-inner">
+    <button id="logoutBtn" onclick="logout()">🚪 Выйти</button>
+  </div>
+</div>
+
+
 
   <div class="video-container">
     <div class="video-card">
@@ -175,6 +284,19 @@ body.summer .video-card {
     document.getElementById("nicknameDisplay").textContent = "👤 @" + nick;
   }
 
+function logout() {
+  document.getElementById("confirmLogout").style.display = "flex";
+}
+
+function confirmExit() {
+  localStorage.removeItem("nickname");
+  location.reload();
+}
+
+function cancelExit() {
+  document.getElementById("confirmLogout").style.display = "none";
+}
+
   function changeTheme(theme) {
     document.body.className = theme;
     localStorage.setItem("theme", theme);
@@ -195,4 +317,13 @@ body.summer .video-card {
 </script>
 
 </body>
+<div class="confirm-logout" id="confirmLogout">
+  <div class="confirm-box">
+    <p>Ты точно хочешь выйти?</p>
+    <div class="confirm-buttons">
+      <button onclick="confirmExit()">Да, выйти</button>
+      <button onclick="cancelExit()">Отмена</button>
+    </div>
+  </div>
+</div>
 </html>
